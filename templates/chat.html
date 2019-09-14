@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+Class Network | Chat
+{% endblock %}
+{% block content %}
+    <div class="container">
+{#        <div id="chat-body" class="panel panel-default">#}
+{#            <div class="panel-heading">{{ user.profile.dept }}&nbsp; Sem :{{ user.profile.sem }}</div>#}
+{#            <div id="msg-list-div" class="panel-body">#}
+{#                <ul id="msg-list" class="list-group">#}
+{#                    {% for obj in chat %}#}
+{#                            {% if obj.user == request.user %}#}
+{#                                    <label>You</label>#}
+{#                                    <label>{{ obj.classinfo.sub }}</label>#}
+{#                                    <li class="text-right list-group-item">{{ obj.message }} </li>#}
+{#                                    <label for="">{{ obj.created }}</label>#}
+{#                                {% else %}#}
+{#                                    <label>{{ obj.user }}</label>#}
+{#                                    <li class="text-left list-group-item">{{ obj.message }}</li>#}
+{#                                    <label for="">{{ obj.created }}</label>#}
+{#                            {% endif %}#}
+{#                    {% empty %}#}
+{#                        <li class="text-right list-group-item">No messages yet!</li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+
+        <div id="chat-body" class="panel panel-default" style="border-bottom-right-radius: 19px; border-bottom-left-radius: 19px;">
+            <div class="panel-heading">{{ user.profile.dept }}&nbsp; Sem :{{ user.profile.sem }}</div>
+            <div id="msg-list-div" class="panel-body">
+                  <div id="msg-list-div" class="panel-body" >
+                    <ul id="msg-list" class="list-group">
+                        {% for obj in chat %}
+                            {% if obj.user.profile.dept == user.profile.dept and obj.user.profile.sem == user.profile.sem  %}
+                                {% if obj.user == request.user  %}
+                                    <li class="text-right list-group-item" >
+                                        <p class="bub" style="margin: 0px; display: inline-block;padding: 10px 20px 10px 20px;background-color: lightgreen; border-radius: 60px 60px 10px 60px !important;">{{ obj.message }} </p>
+                                        <p style="color: darkgreen;">You</p></li>
+                                {% else %}
+                                    <li class="text-left list-group-item" >
+                                        <p class="bub-left" style="margin: 0px;display: inline-block; padding: 10px 20px 10px 20px;background-color: lightblue;  border-radius: 60px 60px 60px 10px !important;">{{ obj.message }} </p>
+                                        <p style="color: darkblue;">{{ obj.user }}</p></li>
+                                {% endif %}
+                            {% endif %}
+                        {% empty %}
+                            <li class="text-center list-group-item">No messages yet!</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer" style="bottom: 0;">
+              <form id="chat-form" method="post" action="{% url 'chat:post' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text"  id="chat-msg"  name="chat-msg"  class="form-control search-form" style="padding: 20px; border-radius: 30px 0px 0px 30px;" placeholder="Type your message....">
+                    <span class="input-group-btn " style="border-radius: 60px;">
+                      <input class="btn btn-default search-btn" id="send" type="submit" value="Send" style="padding: 10px;border-radius: 0px 30px 30px 0px;outline: none !important;background-color: #00C853 !important;color: black !important;">
+                    </span>
+                </div>
+              </form>
+            </div>
+        </div>
+
+
+{#        <form id="chat-form" method="post" action="{% url 'chat:post' %}" data-spy="affix" data-offset-bottom="10">#}
+{#            {% csrf_token %}#}
+{#            <div id="chat-bottom" class="input-group">#}
+{#                <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>#}
+{#                <span class="input-group-btn">#}
+{#                <input class="btn btn-default" id="send" type="submit" value="Send"/>#}
+{#            </span>#}
+{#            </div>#}
+{#        </form>#}
+    </div>
+{% endblock content %}

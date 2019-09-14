@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Class Network | Assignment Sent
+{% endblock %}
+{% block content %}
+    <div class="container" style="background-color: whitesmoke; padding-top: 25px; padding-bottom: 30px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">
+        {% for assign in sentView %}
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h2>Assignment Title : {{ assign.Title }}</h2>
+                        <h2>Subject : {{ assign.Paper }}</h2>
+                    </div>
+                    <div class="col-lg-3" style="padding-top: 20px;">
+                        <h4>Date : {{ assign.created }}</h4>
+                    </div>
+               </div>
+                <hr>
+                <div class="row" style="padding-bottom: 25px;">
+                    <div class="col-lg-12">
+                        <h4><b>Assignment Subject:</b> &nbsp;&nbsp;{{ assign.sub }}</h4>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 25px;">
+                    <div class="col-lg-12">
+                        <h4><b>Assignment Description:</b></h4>
+                        <p>{{ assign.Solution }}</p>
+                    </div>
+                </div>
+                {% if assign.Attachment %}
+                    <div class="row" style="padding-bottom: 25px;">
+                        <div class="col-lg-12">
+                            <h4><i class="fas fa-download"></i><a href="{{ assign.Attachment }}" download>&nbsp;&nbsp;Download Attachment</a></h4>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <p>By : {{ user }}</p>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

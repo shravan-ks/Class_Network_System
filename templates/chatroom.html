@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Class Network | Chat
+{% endblock %}
+{% block content %}
+    <h1>hello room</h1>
+    <h2>{{ user.profile.sem }}</h2>
+
+{% for class in classes %}
+    {% if class.sem  == user.profile.sem and class.dept == user.profile.dept  %}
+        <a href="{% url 'chat:home' %}">
+            <ul style="float: left; list-style: none; background-color: lightgrey; padding: 25px; margin-left: 5px;" >
+                <li>Id {{ class.id }}</li>
+                <li>Sem: {{ class.sem }}</li>
+                <li>Dept: {{ class.dept }}</li>
+                <li>Sub: {{ class.sub }}</li>
+            </ul>
+        </a>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

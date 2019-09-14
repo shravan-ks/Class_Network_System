@@ -1,0 +1,49 @@
+{% load static %}
+{% load i18n widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link href="{% static 'css/bootstrap.min.css'  %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css'  %}" rel="stylesheet">
+  </head>
+  <body>
+   <div class="container" >
+        <div  class="col-lg-6 col-lg-push-3 logcen" >
+            <div class="row text-center">
+                <h2 style="padding-bottom: 20px;">Log In</h2>
+            </div>
+              <div class="row text-center" >
+                  <div class="col-lg-8 col-lg-push-2" style="padding-bottom: 40px;">
+                      <form method="post" class="form-sign">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ next }}" />
+                                {% for field in form %}
+                                    <p class="text-left" style="width: 100%;">
+                                    {{ field.label_tag }}<br>
+                                    {{ field|attr:"class:form-control" }}<br>
+                                    {% for error in field.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                    {% if field.help_text %}
+                                      <p><small style="color: grey">{{ field.help_text }}</small></p>
+                                    {% endif %}
+                                    </p>
+                                {% endfor %}
+                                {% if form.errors %}
+                                    <p style="color: red">Your username and password didn't match. Please try again.</p>
+                              {% endif %}
+                            <button style="width: 100%;" class="btn btn-primary" type="submit">Log in</button>
+                      </form>
+                      <br><a href="{% url 'core:password_reset' %}">Forgot Password ?</a><br>
+                      <br><a href="{% url 'core:signup' %}">Create A New Account ? Sign up</a>
+
+                  </div >
+              </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

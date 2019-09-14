@@ -1,0 +1,16 @@
+
+{% for obj in chat %}
+    {% if obj.user.profile.dept == user.profile.dept and obj.user.profile.sem == user.profile.sem %}
+        {% if obj.user == request.user  %}
+            <li class="text-right list-group-item" >
+                <p class="bub">{{ obj.message }} </p>
+                <p style="color: darkgreen;">You</p></li>
+        {% else %}
+            <li class="text-left list-group-item" >
+                <p class="bub-left">{{ obj.message }} </p>
+                <p style="color: darkblue;">{{ obj.user }}</p></li>
+        {% endif %}
+    {% endif %}
+{% empty %}
+    <li class="text-center list-group-item">No messages yet!</li>
+{% endfor %}

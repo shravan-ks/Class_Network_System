@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Class Network | Assignment View
+{% endblock %}
+{% block content %}
+    <div class="container" style="background-color: whitesmoke; padding-top: 25px; padding-bottom: 30px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">
+        {% for assign in assignview %}
+           {% if assign.sem == user.profile.sem and assign.dept == user.profile.dept %}
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h2>Assignment Title : {{ assign.title }}</h2>
+                        <h2>Subject : {{ assign.Paper }}</h2>
+                    </div>
+                    <div class="col-lg-3" style="padding-top: 20px;">
+                        <h4>Date : {{ assign.created }}</h4>
+                    </div>
+               </div>
+                <hr>
+                <div class="row" style="padding-bottom: 25px;">
+                    <div class="col-lg-12">
+                        <h4><b>Assignment Subject:</b> &nbsp;&nbsp;{{ assign.sub }}</h4>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 25px;">
+                    <div class="col-lg-12">
+                        <h4><b>Assignment Description:</b></h4>
+                        <p>{{ assign.body }}</p>
+                    </div>
+                </div>
+                {% if assign.Attachments %}
+                    <div class="row" style="padding-bottom: 25px;">
+                        <div class="col-lg-12">
+                            <h4><i class="fas fa-download"></i><a href="{{ assign.Attachments }}" download>&nbsp;&nbsp;Download Attachment</a></h4>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6">
+                        <p>{{ assign.sem }}{{ assign.dept }}</p>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 text-right">
+                        {% if assign.From %}
+                            <p>Regards : {{ assign.From }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+           {% else%}
+               <div class="row">
+                    <h2 class="text-center">Seems like you have hit a wrong mail !!</h2>
+               </div>
+           {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

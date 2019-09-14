@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Class Network | Assignment Compose
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+       <div class="col-lg-2">
+               <div class="col-lg-6 col-lg-push-6">
+                    <div class="row">
+                    <div class="btn-group-vertical" role="group" aria-label="...">
+                        <a href="{% url 'assignQ' %}"><button class="btn btn-default menu-ass"><i class="far fa-envelope"></i>&nbsp;&nbsp;Inbox</button></a>
+                        <a href="{% url 'sent' %}"><button class="btn btn-default menu-ass"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;Sent</button></a>
+                        <a href="{% url 'compose' %}"><button class="btn btn-default menu-ass"><i class="fas fa-plus"></i>&nbsp;&nbsp;Compose</button></a>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <div class="col-lg-10">
+             <div class="row">
+          <div class="col-lg-12">
+              <h4>Assignments : Compose</h4>
+          </div>
+        </div>
+        <div class="row">
+           <div class="col-lg-12">
+               <div class="col-lg-6">
+                   <form method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+                   {{ form|crispy }}
+                   <button class="btn btn-success">Send</button>
+               </form>
+               </div>
+           </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

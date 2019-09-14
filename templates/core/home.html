@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Class Network | Home
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="row" >
+                    <h1>Welcome {{ user.username }} !!</h1>
+                    <div class="col-lg-12">
+                        <h2><i class="far fa-newspaper"></i>&nbsp;News Feeds</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            {% for feeds in nwfeed reversed  %}
+                                <div class="col-lg-12" style="padding-bottom: 20px; padding-top: 10px;">
+                                    <div class="col-lg-12" style="background-color: whitesmoke; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); padding: 0px">
+                                        <div class="row" style="background-color: lightblue;">
+                                           <div class="col-lg-12">
+                                                <div class="media">
+                                                  <div class="media-left media-middle">
+                                                    <a href="#">
+                                                      <img class="media-object" style="height: 45px; width: 45px;" src="https://ssmrvmun.com/images/ssmrv-logo.png" alt="...">
+                                                    </a>
+                                                  </div>
+                                                  <div class="media-body" style="padding-top: 12px;">
+                                                    <h4 style="margin-bottom: 1px; " class="media-heading" >SSMRV College</h4>
+                                                    <p>{{ feeds.created }}</p>
+                                                  </div>
+                                                </div>
+                                           </div>
+                                        </div>
+                                        {% if feeds.image %}
+                                            <div class="row">
+                                                <img src="{{ feeds.image.url }}" class="img-responsive" alt="" width="100%;">
+                                            </div>
+                                        {% endif %}
+                                        <div class="row" style="padding-top: 10px; padding-bottom: 5px; background-color: #EEEEEE;">
+                                            <div class="col-lg-12">
+                                                <p style="font-size: 16px">{{ feeds.message }}</p>
+                                                <p>{{ feeds.sub }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-lg-push-7 affix">
+               <div class="col-lg-12">
+                   <div class="row " style="background-color: lightblue; padding-top: 10px; padding-bottom: 10px;">
+                       <div class="col-lg-12">
+                           <h3 style="margin: 0px"><i class="fas fa-calendar-day"></i>&nbsp;&nbsp;Dates and Events to Remember</h3>
+                       </div>
+                   </div>
+                   <div class="row" style="background-color: lightyellow; padding-top: 5px; padding-bottom: 5px;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                       {% for reminder in remind.all|dictsortreversed:"date"|slice:"6" %}
+                           <div class="col-lg-12">
+                                <h5><i class="fas fa-star"></i>&nbsp;&nbsp;{{ reminder.date }}&nbsp;&nbsp;&nbsp;<b>Event: {{ reminder.event }}</b></h5>
+                           </div>
+                       {% endfor %}
+                   </div>
+               </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

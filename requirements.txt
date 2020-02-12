@@ -1,5 +1,5 @@
 appdirs==1.4.0
-Django==1.10.5
+Django==1.11.28
 django-admin-view-permission==1.9
 django-crispy-forms==1.7.2
 django-widget-tweaks==1.4.3
